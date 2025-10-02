@@ -10,6 +10,7 @@ const app=express();
 const mongoose=require("mongoose");
 const path=require("path");
 const Chat=require("./models/chats.js"); //models folder ka andar chats
+app.use(express.static(path.join(__dirname,"public")));
 
 
 
@@ -29,7 +30,11 @@ async function main() {
 }
 
 
-
+app.get("/chats",async(req,res)=>{
+    let chats=await Chat.find();
+    console.log(chats);
+    res.render("index.ejs",{chats});
+});
 
 
 app.get("/",(req,res)=>{
