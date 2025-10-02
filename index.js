@@ -28,10 +28,18 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 
 }
+
+
+// firstroute 
+app.post("/chats",(req,res)=>{
+    let {from,to,msj}=req.body;
+    res.render("new.ejs");
+});
+
+
 // new route 
 app.get("/chats/new",async(req,res)=>{
-    // let chats=await Chat.find();
-    // console.log(chats);
+  
     res.render("new.ejs");
 });
 
