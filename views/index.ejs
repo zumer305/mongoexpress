@@ -20,6 +20,8 @@
       
         <p>To:<i><%=chat.to%></i></p>
         <hr/>
+        <p><%=chat.created.toString().split(" ")[4]%></p>
+          <p><%=chat.created.toString().split(" ").slice(0,4).join(" ")%></p>
     </div>
     <br>
     <br>
