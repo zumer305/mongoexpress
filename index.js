@@ -10,7 +10,9 @@ const app=express();
 const mongoose=require("mongoose");
 const path=require("path");
 const Chat=require("./models/chats.js"); //models folder ka andar chats
-app.use(express.static(path.join(__dirname,"public")));
+
+app.use(express.static(path.join(__dirname,"public"))); //styling use krny ka liya
+app.use(express.urlencoded({extended:true})); //pass krny ka liya 
 
 
 
@@ -33,7 +35,21 @@ async function main() {
 // firstroute 
 app.post("/chats",(req,res)=>{
     let {from,to,msj}=req.body;
-    res.render("new.ejs");
+    let newChat=new Chat({
+        from:from,
+        to:to,
+        msj:msj,
+        created:new Date(),
+    });
+    newChat.save()
+.then((res)=>{
+    console.log(res);
+}) 
+.catch((err)=>{
+    console.log(err);
+});
+
+   res.redirect("/chats");
 });
 
 
